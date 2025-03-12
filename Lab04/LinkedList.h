@@ -161,6 +161,25 @@ public:
       current = next;
     }
   }
+
+  // move constructor
+  // takes all the nodes from the other list and makes them part of this list
+  LinkedList(LinkedList && other){
+    root = other.root;
+    other.root = nullptr;
+  }
+
+  // move copy constructor
+  // takes all the nodes from the source list and makes them part of this list
+  LinkedList & operator=(LinkedList && other){
+    if (this != &other){
+      this->~LinkedList();
+      root = other.root;
+      other.root = nullptr;
+    }
+
+    return *this;
+  }
 };
 
 ostream & operator<<(ostream & os, const LinkedList & linkedList) {
